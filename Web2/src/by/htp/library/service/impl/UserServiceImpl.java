@@ -10,15 +10,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-
-
 public class UserServiceImpl implements UserService {
 
 	@Override
 	public User authorization(String login, String password) {
-		
-		
-	
 		User user = null;
 		Connection con = null;
 		Statement st = null;
@@ -26,30 +21,20 @@ public class UserServiceImpl implements UserService {
 		try {
 			
 			Class.forName("org.gjt.mm.mysql.Driver");
-			
 			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/list", "root", "");
 			st = con.createStatement();
 			String sql="SELECT * FROM USERS where login=?";
-			
 			PreparedStatement ps=con.prepareStatement(sql);
 			ps.setString(1, login);
-			
-			
 			rs = ps.executeQuery();
 			while (rs.next()) {
-				
-				System.out.println(rs.getInt(1) + " " + rs.getString(2) + " " + rs.getString(3));
+			int id=rs.getInt(1);
 			String name=rs.getString(2);
-			System.out.println(name);
-			user=new User();
-			user.setName(name);
+			String surname=rs.getString(3);
+			String loginBD=rs.getString(4);
+			String passwordBD=rs.getString(5);
+			user=new User(id,name,surname,loginBD,passwordBD);
 			}
-			
-		
-		
-			 
-			
-			
 			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();

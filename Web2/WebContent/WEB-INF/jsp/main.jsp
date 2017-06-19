@@ -10,7 +10,9 @@
 <body>
 	
 <h1>
+Hello, 
 <c:out value="${ requestScope.user.name} "/>
+<c:out value="${ requestScope.user.surname} "/>
 </h1>
 </body>
 </html>

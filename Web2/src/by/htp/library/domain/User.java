@@ -1,12 +1,21 @@
 package by.htp.library.domain;
 
 public class User {
+	private int id;
 	private String name;
 	private String surname;
 	private String login;
 	private String password;
-	private int id;
-
+	
+	public User(int id,String name,String surname,String login,String password) {
+		super();
+		this.id=id;
+		this.name=name;
+		this.surname=surname;
+		this.login=login;
+		this.password=password;
+		
+	}
 	public String getLogin() {
 		return login;
 	}
@@ -30,17 +39,7 @@ public class User {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public User() {
-		
-	}
-
-	public User(int id,String name,String login) {
-		super();
-		this.id=id;
-		
-		this.name=name;
-		this.login=login;
-	}
+	
 
 	public String getName() {
 		return name;
