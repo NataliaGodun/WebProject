@@ -3,8 +3,43 @@ package by.htp.library.domain;
 public class User {
 	private String name;
 	private String surname;
+	private String login;
+	private String password;
+	private int id;
 
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 	public User() {
+		
+	}
+
+	public User(int id,String name,String login) {
+		super();
+		this.id=id;
+		
+		this.name=name;
+		this.login=login;
 	}
 
 	public String getName() {
