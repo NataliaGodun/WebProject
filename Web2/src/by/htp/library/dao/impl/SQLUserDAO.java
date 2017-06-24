@@ -67,7 +67,7 @@ public class SQLUserDAO implements UserDAO{
 		Statement st = null;
 		ResultSet rs = null;
 		User user=null;
-		int id=13;
+		int id=14;
 		try {
 			
 			Class.forName("org.gjt.mm.mysql.Driver");
@@ -81,6 +81,11 @@ public class SQLUserDAO implements UserDAO{
 			ps.setString(4, login);
 			ps.setString(5, password);
 			ps.executeUpdate();
+			System.out.println("Doshla suda");
+			String sql2="SELECT * FROM USERS where login=? and password=?";
+			 ps=con.prepareStatement(sql2);
+			ps.setString(1, login);
+			ps.setString(2, password);
 			rs = ps.executeQuery();
 			while (rs.next()) {
 			int idDB=rs.getInt(1);
