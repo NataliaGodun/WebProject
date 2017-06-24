@@ -15,9 +15,17 @@ Login:<br/>
 Password:<br/>
 <input type="password" name="password" value=""/><br/>
 <input type="submit" value="sign in"/>
-</form>
-<c:if test="${not empty requestScope.errorMessage}">
-<c:out value="${requestScope.errorMessage}"/>
+<br/>
+<c:if test="${not empty  requestScope.errorMessage }">
+<c:out value="${  requestScope.errorMessage }"/>
 </c:if>
+<br/>
+<br/>
+Or  select:<br/>
+
+
+<a href="reg.jsp">registration</a>
+</form>
+
 </body>
 </html>

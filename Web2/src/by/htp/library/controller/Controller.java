@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+//import by.htp.connection.pool.ConnectionPool;
+//import by.htp.connection.pool.DBResourceManager;
 import by.htp.library.command.Command;
 
 public class Controller extends HttpServlet {
@@ -22,17 +24,18 @@ public class Controller extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub
 		super.init(config);
+		//DBResourceManager db=DBResourceManager.getInstance();
+		//ConnectionPool cp=cp.initPoolData(); 
 	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("hi");
 	}
-
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*System.out.println(request.getParameter("login"));
+		System.out.println(request.getParameter("login"));
 		System.out.println(request.getParameter("password"));
-		System.out.println(request.getParameter("command"));*/
+		System.out.println(request.getParameter("command"));
 		String commandName=request.getParameter("command");
+		
 		Command command=provider.getCommand(commandName);
 		command.execute(request, response);
 		
