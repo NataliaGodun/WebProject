@@ -80,6 +80,7 @@ public class SQLUserDAO implements UserDAO{
 			ps.setString(3, surname);
 			ps.setString(4, login);
 			ps.setString(5, password);
+			ps.executeUpdate();
 			rs = ps.executeQuery();
 			while (rs.next()) {
 			int idDB=rs.getInt(1);
