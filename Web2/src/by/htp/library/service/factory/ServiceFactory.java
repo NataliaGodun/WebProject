@@ -1,5 +1,6 @@
-package by.htp.library.service;
+package by.htp.library.service.factory;
 
+import by.htp.library.service.UserService;
 import by.htp.library.service.impl.UserServiceImpl;
 
 public class ServiceFactory {

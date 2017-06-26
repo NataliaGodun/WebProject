@@ -19,7 +19,7 @@ public class SQLUserDAO implements UserDAO{
 	@Override
 	public User authorization(String login, String password)  {
 		Connection con = null;
-		Statement st = null;
+	//	Statement st = null;
 		ResultSet rs = null;
 		User user=null;
 		
@@ -37,7 +37,7 @@ public class SQLUserDAO implements UserDAO{
 			System.out.println(cp);
 			//Class.forName("org.gjt.mm.mysql.Driver");
 			//con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/site?useSSL=false","root","ER567ghm");
-			st = con.createStatement();
+		//	st = con.createStatement();
 			String sql="SELECT * FROM USERS where login=? and password=?";
 			PreparedStatement ps=con.prepareStatement(sql);
 			ps.setString(1, login);

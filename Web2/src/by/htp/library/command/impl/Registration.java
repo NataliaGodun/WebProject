@@ -9,8 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import by.htp.library.command.Command;
 import by.htp.library.domain.User;
-import by.htp.library.service.ServiceFactory;
+
 import by.htp.library.service.UserService;
+import by.htp.library.service.factory.ServiceFactory;
 import by.rdtc.service.exception.ServiceException;
 
 public class Registration implements Command {
