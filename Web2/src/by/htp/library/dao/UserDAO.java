@@ -1,5 +1,6 @@
 package by.htp.library.dao;
 
+
 import by.htp.library.domain.User;
 
 public interface UserDAO {

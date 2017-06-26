@@ -1,18 +1,10 @@
 package by.htp.library.command.impl;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import by.htp.library.command.Command;
 import by.htp.library.domain.User;
 import by.htp.library.service.ServiceFactory;

@@ -17,16 +17,15 @@ import java.sql.SQLXML;
 import java.sql.Savepoint;
 import java.sql.Statement;
 import java.sql.Struct;
-import java.util.Locale;
+
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executor;
 
-import _java._se._07._connectionpool.DBParameter;
 
-public final class ConnectionPool {
+public final class ConnectionPool implements ConPool{
 	private BlockingQueue<Connection> connectionQueue;
 	private BlockingQueue<Connection> givenAwayConQueue;
 	private String driverName;
@@ -35,7 +34,7 @@ public final class ConnectionPool {
 	private String password;
 	private int poolSize;
 
-	private ConnectionPool() {
+	/*ConnectionPool() {
 		DBResourceManager dbResourseManager = DBResourceManager.getInstance();
 		this.driverName = dbResourseManager.getValue(DBParameter.DB_DRIVER);
 		this.url = dbResourseManager.getValue(DBParameter.DB_URL);
@@ -48,10 +47,27 @@ public final class ConnectionPool {
 		} catch (NumberFormatException e) {
 			poolSize = 5;
 		}
+	}*/
+	
+	
+	
+	ConnectionPool() {
+		//DBResourceManager dbResourseManager = DBResourceManager.getInstance();
+		this.driverName = "org.gjt.mm.mysql.Driver";
+		this.url = "jdbc:mysql://127.0.0.1/site?useSSL=false";
+		this.user = "root";
+		
+
+		this.password = "ER567ghm";
+		try {
+			this.poolSize =2;
+		} catch (NumberFormatException e) {
+			poolSize = 2;
+		}
 	}
 	
 	public void initPoolData() throws ConnectionPoolException {
-		Locale.setDefault(Locale.ENGLISH);
+		//Locale.setDefault(Locale.ENGLISH);
 		try {
 			Class.forName(driverName);
 			givenAwayConQueue = new ArrayBlockingQueue<Connection>(poolSize);
@@ -85,12 +101,30 @@ public final class ConnectionPool {
 		Connection connection = null;
 		try {
 			connection = connectionQueue.take();
+			System.out.println("v take connectionQueue- "+connectionQueue.size());
 			givenAwayConQueue.add(connection);
+			System.out.println("v take givenAwayConQueue-"+givenAwayConQueue.size());
 		} catch (InterruptedException e) {
 			throw new ConnectionPoolException("Error connecting to the data source.", e);
 		}
 		return connection;
 	}
+	public void removeConnection() throws ConnectionPoolException {
+		Connection connection;
+		try {
+			connection=givenAwayConQueue.take();
+			System.out.println("v remove givenAwayConQueue-"+givenAwayConQueue.size());
+			connectionQueue.add(connection);
+			System.out.println("v remove connectionQueue- "+connectionQueue.size());
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+			
+		
+	}
+	
 
 	public void closeConnection(Connection con, Statement st, ResultSet rs) {
 		try {
