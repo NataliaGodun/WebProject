@@ -34,30 +34,10 @@ public final class ConnectionPool implements ConPool{
 	private String password;
 	private int poolSize;
 
-	/*ConnectionPool() {
-		DBResourceManager dbResourseManager = DBResourceManager.getInstance();
-		this.driverName = dbResourseManager.getValue(DBParameter.DB_DRIVER);
-		this.url = dbResourseManager.getValue(DBParameter.DB_URL);
-		this.user = dbResourseManager.getValue(DBParameter.DB_USER);
-		;
-
-		this.password = dbResourseManager.getValue(DBParameter.DB_PASSWORD);
-		try {
-			this.poolSize = Integer.parseInt(dbResourseManager.getValue(DBParameter.DB_POLL_SIZE));
-		} catch (NumberFormatException e) {
-			poolSize = 5;
-		}
-	}*/
-	
-	
-	
 	ConnectionPool() {
-		//DBResourceManager dbResourseManager = DBResourceManager.getInstance();
 		this.driverName = "org.gjt.mm.mysql.Driver";
 		this.url = "jdbc:mysql://127.0.0.1/site?useSSL=false";
 		this.user = "root";
-		
-
 		this.password = "ER567ghm";
 		try {
 			this.poolSize =2;
@@ -67,7 +47,6 @@ public final class ConnectionPool implements ConPool{
 	}
 	
 	public void initPoolData() throws ConnectionPoolException {
-		//Locale.setDefault(Locale.ENGLISH);
 		try {
 			Class.forName(driverName);
 			givenAwayConQueue = new ArrayBlockingQueue<Connection>(poolSize);
@@ -101,9 +80,7 @@ public final class ConnectionPool implements ConPool{
 		Connection connection = null;
 		try {
 			connection = connectionQueue.take();
-			System.out.println("v take connectionQueue- "+connectionQueue.size());
 			givenAwayConQueue.add(connection);
-			System.out.println("v take givenAwayConQueue-"+givenAwayConQueue.size());
 		} catch (InterruptedException e) {
 			throw new ConnectionPoolException("Error connecting to the data source.", e);
 		}
@@ -113,16 +90,11 @@ public final class ConnectionPool implements ConPool{
 		Connection connection;
 		try {
 			connection=givenAwayConQueue.take();
-			System.out.println("v remove givenAwayConQueue-"+givenAwayConQueue.size());
 			connectionQueue.add(connection);
-			System.out.println("v remove connectionQueue- "+connectionQueue.size());
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 			
-		
 	}
 	
 

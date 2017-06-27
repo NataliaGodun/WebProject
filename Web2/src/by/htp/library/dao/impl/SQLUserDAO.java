@@ -21,6 +21,7 @@ public class SQLUserDAO implements UserDAO{
 		Connection con = null;
 	//	Statement st = null;
 		ResultSet rs = null;
+		
 		User user=null;
 		
 		try {
