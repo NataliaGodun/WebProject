@@ -26,17 +26,23 @@ public class Authorization implements Command {
 		UserService userService=factory.getUserService();
 		
 		User user = null;
+		String page = null;
 		try {
 			user = userService.authorization(login, password);
+			request.setAttribute("user", user);
+			page="WEB-INF/jsp/main.jsp";
+			
 		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
+			request.setAttribute("errorMessage", "wrong login or password");
+			page="index.jsp";
+			
 			e.printStackTrace();
 		}
 		
 	
 		
 		
-		String page;
+		/*String page;
 		if (user!=null){
 			request.setAttribute("user", user);
 			page="WEB-INF/jsp/main.jsp";
@@ -44,7 +50,7 @@ public class Authorization implements Command {
 			request.setAttribute("errorMessage", "wrong login or password");
 			page="index.jsp";
 			
-		}
+		}*/
 		
 		RequestDispatcher dispatcher=request.getRequestDispatcher(page);
 		

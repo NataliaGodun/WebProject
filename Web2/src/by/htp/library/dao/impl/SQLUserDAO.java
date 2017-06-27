@@ -19,7 +19,6 @@ public class SQLUserDAO implements UserDAO{
 	@Override
 	public User authorization(String login, String password)  {
 		Connection con = null;
-	//	Statement st = null;
 		ResultSet rs = null;
 		
 		User user=null;
@@ -32,7 +31,6 @@ public class SQLUserDAO implements UserDAO{
 			try {
 				con=cp.takeConnection();
 			} catch (ConnectionPoolException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			System.out.println(cp);
